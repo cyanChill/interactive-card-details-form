@@ -32,6 +32,7 @@ body {
   grid-template-columns: 100%;
 }
 
+/* Background Accent Img */
 #accent-img {
   grid-area: 1 / 1 / 2 / 2;
   object-fit: cover;
@@ -43,8 +44,15 @@ body {
   height: 100%;
 }
 
+/* Credit Card Component */
 #credit-card {
   --card-height: clamp(5rem, 45vw, 12.5rem);
+  --card-width: calc(var(--card-height) * var(--card-aspect-ratio));
+  --card-bdr-offset: calc(0.075 * var(--card-height));
+
+  --fs-sm: clamp(8px, 2vw, 12px);
+  --fs-md: clamp(10px, 3vw, 16px);
+  --fs-lg: clamp(10px, 5vw, 18px);
 
   grid-area: 1 / 1 / 3 / 2;
   align-self: center;
@@ -58,6 +66,7 @@ body {
 #card-front {
   grid-area: 2 / 1 / 3 / 2;
   transform: translateY(-40%);
+  z-index: 1;
 }
 
 #card-back {
@@ -65,14 +74,72 @@ body {
   justify-self: flex-end;
 }
 
+/* Individual card styling */
 .cardImg {
-  height: var(--card-height);
+  width: max-content;
+  isolation: isolate;
+  position: relative;
+  display: grid;
+  grid-template-rows: var(--card-height);
+  letter-spacing: 2px;
+  color: hsl(var(--white));
 }
 
 .cardImg > * {
+  grid-area: 1 / 1 / 2 / 2;
+  height: max-content;
+  padding: 0;
+  margin: 0;
+}
+
+.cardImg > [data-bkg] {
   height: 100%;
 }
 
+/* Stuff that goes on the card */
+.cardImg > *:not([data-bkg]) {
+  position: absolute;
+}
+
+#card-logo {
+  height: calc(0.1 * var(--card-width));
+  top: var(--card-bdr-offset);
+  left: var(--card-bdr-offset);
+}
+
+#card-num {
+  width: 100%;
+  max-width: calc(var(--card-width) - 2 * var(--card-bdr-offset));
+
+  left: var(--card-bdr-offset);
+  top: calc(0.55 * var(--card-height));
+  font-size: var(--fs-lg);
+}
+
+#card-name,
+#card-exp {
+  bottom: var(--card-bdr-offset);
+  font-size: var(--fs-sm);
+}
+
+#card-name {
+  left: var(--card-bdr-offset);
+  text-transform: uppercase;
+  letter-spacing: 1.25px;
+}
+
+#card-exp {
+  right: var(--card-bdr-offset);
+}
+
+#card-cv {
+  right: calc(var(--card-bdr-offset) * 3);
+  top: calc(0.49 * var(--card-height));
+  transform: translateY(-50%);
+  font-size: var(--fs-md);
+}
+
+/* Contains form + success message */
 #main-content {
   grid-area: 2 / 1 / 3 / 2;
 }
@@ -92,9 +159,6 @@ body {
     grid-template-columns: 3fr 5fr;
   }
 
-  #accent-img {
-  }
-
   #credit-card {
     --card-height: clamp(10rem, 20vw, 15rem);
     grid-area: 1 / 1 / 2 / 3;
@@ -109,9 +173,7 @@ body {
   #card-back {
     grid-area: 2 / 1 / 3 / 2;
     justify-self: initial;
-    transform: translateX(
-      calc(7.5vw + calc(0.15 * var(--card-height) * var(--card-aspect-ratio)))
-    );
+    transform: translateX(calc(7.5vw + calc(0.15 * var(--card-width))));
   }
 
   #main-content {
