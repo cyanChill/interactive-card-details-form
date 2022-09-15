@@ -7,14 +7,36 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   
   <title>Frontend Mentor | Interactive card details form</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
 <body>
+  <div id="design-container">
+    <!-- Image Gradient Accent -->
+    <picture id="accent-img">
+      <source srcset="images/bg-main-mobile.png" media="(max-width: 375px)" />
+      <img src="images/bg-main-desktop.png" alt="accent background" />
+    </picture>
+
+    <!-- Credit Card -->
+    <section id="credit-card">
+      <div id="card-front" class="cardImg">
+        <img src="images/bg-card-front.png"  />
+      </div>
+      <div id="card-back" class="cardImg">
+        <img src="images/bg-card-back.png" />
+      </div>
+    </section>
+
+
+    <!-- Main Form Content -->
+    <main id="main-content">
+
+    </main>
+
+
+  </div>
 
   0000 0000 0000 0000
   Jane Appleseed
@@ -45,7 +67,7 @@
   
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a href="https://github.com/cyanChill">Anthony Liang</a>.
   </div>
 </body>
 </html>
