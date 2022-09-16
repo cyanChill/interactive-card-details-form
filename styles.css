@@ -14,8 +14,8 @@
 
   --ff: "Space Grotesk", sans-serif;
 
-  /* Multiply by height to get expected width */
-  --card-aspect-ratio: calc(447 / 245);
+  /* Multiply by width to get expected height */
+  --card-aspect-ratio: calc(245 / 447);
 }
 *,
 *::before,
@@ -40,8 +40,14 @@ body {
 }
 
 #design-container {
+  --card-width: clamp(12.5rem, 65vw, 22.5rem);
+  --card-height: calc(var(--card-width) * var(--card-aspect-ratio));
+
   display: grid;
-  grid-template-rows: 30vh max(70vh, 100%);
+  grid-template-rows: calc(1.5 * var(--card-height)) max(
+      calc(100% - 1.5 * var(--card-height)),
+      100%
+    );
   grid-template-columns: 100%;
 }
 
@@ -59,13 +65,11 @@ body {
 
 /* Credit Card Component */
 #credit-card {
-  --card-height: clamp(5rem, 45vw, 12.5rem);
-  --card-width: calc(var(--card-height) * var(--card-aspect-ratio));
   --card-bdr-offset: calc(0.075 * var(--card-height));
 
-  --fs-sm: clamp(8px, 3vw, 12px);
-  --fs-md: clamp(10px, 4vw, 16px);
-  --fs-lg: clamp(10px, 5vw, 26px);
+  --fs-sm: clamp(8px, 2.25vw, 12px);
+  --fs-md: clamp(10px, 3.25vw, 16px);
+  --fs-lg: clamp(10px, 4.25vw, 26px);
 
   grid-area: 1 / 1 / 3 / 2;
 
@@ -97,6 +101,8 @@ body {
   grid-template-rows: var(--card-height);
   letter-spacing: 2px;
   color: hsl(var(--white));
+  filter: drop-shadow(20px 20px 12.5px hsl(var(--dark-grey-violet) / 10%));
+  border-radius: 0.25rem;
 }
 
 .cardImg > * {
@@ -274,18 +280,19 @@ body {
 /* Desktop styling */
 @media (min-width: 768px) {
   #design-container {
+    --card-width: clamp(15rem, 37.5vw, 30rem);
+
     grid-template-rows: 100vh;
     grid-template-columns: 3fr 5fr;
   }
 
   #credit-card {
-    --card-height: clamp(10rem, 20vw, 15rem);
     --fs-lg: clamp(10px, 2.5vw, 26px);
 
     width: max-content;
     grid-area: 1 / 1 / 2 / 3;
     align-self: center;
-    gap: 0.5rem;
+    gap: 2rem;
     transform: translateX(7.5vw);
   }
 
@@ -304,7 +311,7 @@ body {
     grid-area: 1 / 2 / 2 / 3;
     align-items: center;
     padding-top: 0.5rem;
-    padding-left: 7.5rem;
+    padding-left: 7.75rem;
   }
 
   #card-form {
