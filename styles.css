@@ -277,6 +277,30 @@ body {
 #complete-state {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#complete-state > h1 {
+  padding: 0;
+  margin-block: 2rem 0.5rem;
+  color: hsl(var(--very-dark-violet));
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+#complete-state > p {
+  padding: 0;
+  margin-block: 0.5rem 2rem;
+  color: hsl(var(--dark-grey-violet));
+  font-size: clamp(0.75rem, 5vw, 0.95rem);
+  font-weight: 400;
+}
+
+#complete-state > .btn {
+  --fs-btn: clamp(0.8rem, 5vw, 1rem);
+  width: 100%;
 }
 
 /* Attribution styling */
