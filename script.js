@@ -66,7 +66,7 @@ const expInputCtgy = {
   year: { card: cardYear, input: yearInput },
 };
 
-function expInputValidation(e, ctgy, max) {
+function expInputValidation(e, ctgy, max, min) {
   expGroup.classList.remove("error");
   expInputCtgy[ctgy].input.classList.remove("error");
 
@@ -79,8 +79,13 @@ function expInputValidation(e, ctgy, max) {
     expErrorField.textContent = "Wrong format, 2 numbers only";
     expGroup.classList.add("error");
     expInputCtgy[ctgy].input.classList.add("error");
-  } else if (+expInputCtgy[ctgy].input.value > max) {
-    expErrorField.textContent = `Max value is ${max}`;
+  } else if (
+    max &&
+    min &&
+    (+expInputCtgy[ctgy].input.value > max ||
+      +expInputCtgy[ctgy].input.value < min)
+  ) {
+    expErrorField.textContent = `Number must be >${min} and <${max}`;
     expGroup.classList.add("error");
     expInputCtgy[ctgy].input.classList.add("error");
   } else {
@@ -88,13 +93,19 @@ function expInputValidation(e, ctgy, max) {
   }
 }
 
-monthInput.addEventListener("change", (e) => expInputValidation(e, "month", 12));
-monthInput.addEventListener("input", (e) => expInputValidation(e, "month", 12));
-monthInput.addEventListener("focus", (e) => expInputValidation(e, "month", 12));
+monthInput.addEventListener("change", (e) =>
+  expInputValidation(e, "month", 12, 01)
+);
+monthInput.addEventListener("input", (e) =>
+  expInputValidation(e, "month", 12, 01)
+);
+monthInput.addEventListener("focus", (e) =>
+  expInputValidation(e, "month", 12, 01)
+);
 
-yearInput.addEventListener("change", (e) => expInputValidation(e, "year", 99));
-yearInput.addEventListener("input", (e) => expInputValidation(e, "year", 99));
-yearInput.addEventListener("focus", (e) => expInputValidation(e, "year", 99));
+yearInput.addEventListener("change", (e) => expInputValidation(e, "year"));
+yearInput.addEventListener("input", (e) => expInputValidation(e, "year"));
+yearInput.addEventListener("focus", (e) => expInputValidation(e, "year"));
 
 /* Card CVC Input */
 const cardCvc = document.getElementById("card-cvc");
@@ -147,11 +158,10 @@ cardForm.addEventListener("submit", (e) => {
   console.log("Submitting form...");
 
   if (
-    !nameRegex.test(nameInput.value) ||
-    !numRegex.test(numInput.value) ||
-    !expRegex.test(monthInput.value) ||
-    !expRegex.test(yearInput.value) ||
-    !cvcRegex.test(cvcInput.value)
+    nameGroup.classList.contains("error") ||
+    numGroup.classList.contains("error") ||
+    expGroup.classList.contains("error") ||
+    cvcGroup.classList.contains("error")
   ) {
     return;
   }
