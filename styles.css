@@ -143,6 +143,8 @@ body {
 }
 
 #card-name {
+  max-width: 20ch;
+  word-break: break-word;
   left: var(--card-bdr-offset);
   text-transform: uppercase;
   letter-spacing: 1.25px;
@@ -152,7 +154,7 @@ body {
   right: var(--card-bdr-offset);
 }
 
-#card-cv {
+#card-cvc {
   right: calc(var(--card-bdr-offset) * 3);
   top: calc(0.49 * var(--card-height));
   transform: translateY(-50%);
@@ -186,7 +188,6 @@ body {
   display: grid;
   grid-template-columns: repeat(2, calc((100% - var(--col-gap)) / 2));
   grid-template-rows: max-content;
-  align-items: center;
   gap: var(--row-gap) var(--col-gap);
 }
 
@@ -231,11 +232,12 @@ body {
   border-radius: 0.45rem;
 }
 
-.form-group:not(.error) input:focus {
+.form-group:not(.error) input:not(.error):focus {
   --border-grad: var(--gradient-main);
 }
 
-.form-group.error input {
+.form-group.error > input,
+.form-group input.error {
   --border-clr: hsl(var(--error-red));
 }
 

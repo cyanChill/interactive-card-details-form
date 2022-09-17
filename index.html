@@ -38,38 +38,71 @@
 
         <div id="card-back" class="cardImg">
           <img src="images/bg-card-back.png" data-bkg />
-          <p id="card-cv">000</p>
+          <p id="card-cvc">000</p>
         </div>
       </section>
 
       <!-- Main Content -->
       <main id="main-content">
         <!-- Form -->
-        <form id="card-form" class="main-content-container hidden">
-          <div class="form-group error">
+        <form id="card-form" class="main-content-container">
+          <div class="form-group" data-form-el="name">
             <label>Cardholder Name</label>
-            <input type="text" placeholder="e.g. Jane Appleseed" />
-            <p class="error-msg">Can't be blank</p>
-          </div>
-
-          <div class="form-group">
-            <label>Cardholder Number</label>
-            <input type="text" placeholder="e.g. 1234 5678 9123 0000" />
+            <input
+              name="name"
+              type="text"
+              maxlength="30"
+              placeholder="e.g. Jane Appleseed"
+              required
+            />
             <p class="error-msg"></p>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" data-form-el="card-num">
+            <label>Cardholder Number</label>
+            <input
+              name="card-num"
+              type="text"
+              maxlength="19"
+              placeholder="e.g. 1234 5678 9123 0000"
+              required
+            />
+            <p class="error-msg"></p>
+          </div>
+
+          <div class="form-group" data-form-el="exp">
             <label>Exp. Date (MM/YY)</label>
             <div class="div-split">
-              <input type="text" placeholder="MM" />
-              <input type="text" placeholder="YY" />
+              <input
+                name="month"
+                type="number"
+                min="00"
+                max="12"
+                placeholder="MM"
+                required
+              />
+              <input
+                name="year"
+                type="number"
+                min="00"
+                max="99"
+                placeholder="YY"
+                required
+              />
             </div>
             <p class="error-msg"></p>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" data-form-el="cvc">
             <label>CVC</label>
-            <input type="text" placeholder="e.g. 123" />
+            <input
+              name="cvc"
+              type="number"
+              min="000"
+              max="999"
+              placeholder="e.g. 123"
+              required
+            />
             <p class="error-msg"></p>
           </div>
 
@@ -77,7 +110,7 @@
         </form>
 
         <!-- Completed state start -->
-        <section id="complete-state" class="main-content-container">
+        <section id="complete-state" class="main-content-container hidden">
           <img src="/images/icon-complete.svg" />
           <h1>Thank you!</h1>
           <p>We've added your card details</p>
